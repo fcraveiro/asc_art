@@ -1,0 +1,34 @@
+# Diretórios e arquivos específicos do ambiente virtual
+venv/
+*.pyc
+*.pyo
+__pycache__/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos temporários do editor
+*.swp
+*.swo
+*.swn
+
+# Arquivos de configuração do editor
+.vscode/
+.idea/
+
+# Arquivos de log
+*.log
+
+# Arquivos gerados pelo build
+dist/
+build/
+*.egg-info/
+
+# Arquivos de banco de dados
+*.sqlite3
+*.db
+
+# Outros arquivos que não são necessários
+*.env
+*.env.*
