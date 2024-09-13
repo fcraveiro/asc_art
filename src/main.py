@@ -1,14 +1,17 @@
 from PIL import Image
 import numpy as np
 
-def image_to_ascii(img, output_width=100, output_height=None):
-    # Caracteres ASCII ordenados por intensidade
-    ascii_chars = ['@', '#', 'S', '%', '?', '*', '+', ';', ':', ',', '.']
+def image_to_ascii(img, output_width=150, output_height=None):
+    # Caracteres ASCII ordenados por intensidade (pode adicionar mais caracteres para mais detalhes)
+    ascii_chars = ['@', '#', 'S', '%', '?', '*', '+', ';', ':', ',', '.', ' ']
     
-    # Redimensionar a imagem
+    # Calcular a altura baseada na largura e na razão de aspecto original
     if output_height is None:
-        output_height = int(img.height * output_width / img.width / 2)
-    img = img.resize((output_width, output_height))
+        aspect_ratio = img.height / img.width
+        output_height = int(output_width * aspect_ratio / 2)
+
+    # Redimensionar a imagem com melhor qualidade
+    img = img.resize((output_width, output_height), Image.LANCZOS)
     
     # Converter para escala de cinza
     img = img.convert('L')
@@ -33,8 +36,14 @@ image_path = 'face.jpg'
 # Carregar a imagem
 img = Image.open(image_path)
 
+# Ajustar a largura e a altura para uma resolução melhor
+output_width = 150  # Ajuste conforme necessário para a resolução desejada
+output_height = None  # Deixe o código calcular a altura
+
 # Converter para ASCII art
-ascii_result = image_to_ascii(img, output_width=100)
+ascii_result = image_to_ascii(img, output_width=output_width, output_height=output_height)
+
+# Imprimir a arte ASCII
 print(ascii_result)
 
 # Opcionalmente, salvar em um arquivo
